@@ -1,0 +1,373 @@
+
+body{
+    overflow-x: hidden;
+    /*background-color: white!important;*/
+    height: 100%;
+}
+#container-error{
+    width: 100%;
+    height: 400px;
+    padding-top:200px;
+    background: rgb(0,0,0,0.5);
+    opacity: 0.9;
+}
+.error{
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    font-size: 1em;
+    color:white;
+    background: #e55a40;
+    opacity: 0.8;
+}
+#video-img{
+    margin-top: 80px;
+    margin-bottom: 80px;
+    width: 150px;
+}
+#only-audio{
+    text-align: center;
+    color: var(--dark-color);
+}
+#status, #waitingvideo{
+    color: white;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    padding: 200px;
+    text-align: center;
+    height: 400px;
+    transition: 1s;
+}
+#plugin{
+    position: relative;
+}
+#remotevideo{
+    width: 100%;
+    margin: auto;
+}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.video-col{
+    background-color: inherit;
+}
+.left-col{
+    background-color: var(--light-color);
+
+    padding: 0 !important;
+    margin-left: 0!important;
+    margin-right: 200px!important;
+}
+/*chat*/
+
+#left-arrow {
+    float: right;
+    margin-right: 20px;
+    margin-top: 40px;
+    display: none;
+    transition: display 10s;
+}
+
+
+#chat-box{
+    opacity: 1;
+    margin-top: 40px;
+    border-radius: 20px;
+    background-color: var(--light-color);
+    padding:0;
+}
+
+
+#chat-title{
+    background-color: var(--dark-color);
+    color: #fff;
+    padding: 5px;
+    box-shadow: -10px 30px 40px rgba(0,0,0,0.3);
+}
+
+#chat{
+    margin: 0 auto;
+    margin-top:20px;
+    margin-bottom: 20px;
+    height: 500px;
+    overflow: auto;
+}
+#chat::-webkit-scrollbar {
+    display: none;
+}
+
+.user-img img{
+    height: 30px;
+    width: 30px;
+}
+
+.user-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-img{
+    font-size: 0.8em;
+    margin: 0!important;
+    padding: 0!important;
+}
+.chat-text{
+    font-size: 14px;
+}
+
+.main-row{
+    position: relative;
+    margin: 0!important;
+    top: 60px;
+}
+.box{
+    margin: 0!important;
+}
+.btn-chat{
+    float: right;
+    margin: 0 auto;
+    margin-bottom: 30px!important;;
+    width: 100px;
+}
+.subtitle{
+    margin-left: 5px;
+}
+.chat-input-group{
+    margin-bottom: 10px;
+}
+
+#popover-images{
+    max-height: 250px;
+    max-width: 400px;
+    overflow: auto;
+
+}
+.popover-img{
+    width: 60px;
+    height: 60px;
+}
+
+.popover-btn{
+    border:none;
+    background-color: inherit;
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin-top:10px;
+    margin-bottom:10px;
+    cursor: pointer;
+}
+
+.popover > .popover-header{
+    background: var(--dark-color);
+    color: white;
+}
+.popover > .arrow {
+    display: none!important;
+}
+.col-popover{
+    padding: 0;
+}
+/*video*/
+.video-col{
+    position: relative;
+}
+#video_1{
+    margin:  0 auto;
+}
+.video-title{
+    font-size: 22px;
+    color: var(--light-color);
+    margin-bottom: 10px;
+}
+
+/*video control*/
+.controls-container{
+    padding: 10px;
+}
+#media-player{
+    width: 90%
+}
+#media-controls{
+    background-color: black;
+}
+
+#live-img{
+    margin-left: 5px;
+    margin-top: -5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 45px;
+    border: 2px solid red;
+    border-radius: 5px;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes example {
+    from{border: 2px solid #000}
+    to{border: 2px solid red;
+        border-radius: 5px;}
+}
+
+
+.btn-player{
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--light-color);
+    border-radius: 20px;
+    color: var(--light-color);
+    background-color: inherit;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btn-player:hover{
+    background-color: var(--light-color);
+    color: #333A2F;
+}
+/*seek-bar*/
+#seek-bar-div{
+    background: black;
+    padding: 5px 15px 5px 15px;
+
+}
+#seek-bar-div input[type=range] {
+    width: 100%;
+}
+
+
+/*volume bar style*/
+#volume-bar{
+    margin-top: 15px;
+    margin-right: 10px;
+
+}
+
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 20%; /* Specific width is required for Firefox. */
+    background: var(--dark-color); /* Otherwise white in Chrome */
+}
+
+/*Mozzilla adjustments*/
+@-moz-document url-prefix() {
+    #volume-bar{
+        margin-top: 5px;
+    }
+    input[type=range]{
+        background: transparent;
+    }
+}
+
+/*IE adjustments*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+    input[type=range]{
+        background: transparent;
+    }
+    #volume-bar{
+        margin-top: -5px;
+    }
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: 1px solid var(--light-color);
+    height: 14px;
+    width: 10px;
+    border-radius: 3px;
+    background: var(--light-color);
+    cursor: pointer;
+    margin-top: -7px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+    box-shadow: none;
+    border: 1px solid var(--light-color);
+    height: 17px;
+    width: 10px;
+    border-radius: 3px;
+    background: var(--light-color);
+    cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+    box-shadow: none;
+    border: 1px solid var(--light-color);
+    height: 17px;
+    width: 10px;
+    border-radius: 3px;
+    background: var(--light-color);
+    cursor: pointer;
+    margin-top: -7px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+
+}
+
+.custom-select{
+    width: 120px!important;
+    height: 30px!important;
+    padding:0 0 5px 10px !important;
+    margin: 5px!important;
+    color: var(--light-color)!important;
+    background: inherit!important;
+    border: 2px solid var(--light-color);!important;
+    border-radius: 20px!important;
+}
+
+.custom-select option:hover{
+    background: var(--light-color);!important;
+}
+
+#view-div{
+    font-size: 16px;
+    color: var(--light-color);
+}
+#no-video-text{
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1;
+}
+.didascalia-video{
+    color: white;
+    clear: both;
+    font-size: 1em;
+    margin: auto!important;
+}
+.username{
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--light-color);
+    clear: both;
+
+}
+@media only screen and (max-width: 1300px) {
+    #chat{
+        height: 320px;
+    }
+}

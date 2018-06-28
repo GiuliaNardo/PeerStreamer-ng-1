@@ -1,0 +1,193 @@
+<!doctype>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>PeerStreamer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <link rel="icon" href="img/albapemba.jpg">
+     <!--   Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/indexstyle.css">
+        <link rel="stylesheet" href="css/sidebarstyle.css">
+        <link rel="stylesheet" href="css/navbarstyle.css">
+        <link rel="stylesheet" href="css/videostyle.css">
+
+        <link rel="stylesheet" href="./libs/material-design/css/material-design-iconic-font.min.css">
+
+        <link rel="stylesheet" href="./libs/bootstrap-4.0.0-dist/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="./libs/bootstrap-4.0.0-dist/css/bootstrap-reboot.css"><link rel="stylesheet" href="./libs/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+        <script id="jquery" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+        <script id="popper" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+        <script id="bootstrap" src="./libs/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/5.0.1/adapter.min.js" ></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.1.0/bootbox.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+
+
+        <script src="/assets/checkLibs.js"></script>
+        <script src="/assets/home.js"></script>
+        <script src="/assets/video.js"></script>
+        <script src="/assets/janus.js"></script>
+        <script src="/assets/psng.js"></script>
+        <script src="/assets/player.js"></script>
+    </head>
+    <body>
+        <nav class="navbar fixed-top justify-content-start">
+        	<a class="navbar-brand" href="./index.html">PeerStreamer ng</a>
+        	<div class="form-inline">
+        		<input class="form-control searchbar" type="search" placeholder="Type to filter channels" id="search" onkeydown="filterChannels()" >
+        		<button class="btn btn-search" onclick="filterChannels()">
+        			<i class="zmdi zmdi-search"></i>
+        		</button>
+        	</div>
+        </nav>
+        <div class="sidebar">
+            <div class="side-in">
+        		<div id="side-in-title">Available channels</div>
+        		<div class="channel-list" id="channel-list"></div>
+        	</div>
+            <div class="side-btn">
+                <a href="./livepage.html"<button class="my-btn btn">Set up your live stream!</button></a>
+            </div>
+        </div>
+        <div class="page" id="page">
+            <div id="home" style="display:block">
+                <div id="no-ch">No channel available</div>
+                <div class="container-thumbnail container-fluid ">
+                    <div class="row" id="thumbnail">
+
+                    </div>
+                </div>
+            </div>
+<!-- video html -->
+            <div class="row main-row" id="video" style="display:none">
+                <div class="col-9 float-left" id="colonnaPlayer">
+                    <div class="container-fluid " id="media-player">
+                        <div class="video-title" id="player-title"></div>
+                        <div id="only-audio" style="display: none"><img id="video-img" src="./img/no-video.svg"><p id="no-video-text">No video available<p></div>
+                        <div id="plugin" >
+
+                            <div id="status" style="display:none"></div>
+                            <div class="panel-body" id="stream"></div>
+
+                        </div>
+                        <div id="container-error" style="display:none">
+                            <div class="error" id="ch-stop">Channel no longer available</div>
+                        </div>
+
+<!--
+                            <video id="media-video" width="100%"  controls onclick="togglePlayPause()">
+                                <source src="/video/oceans.mp4" type="video/mp4">
+                                <source src="" type="">
+                            </video>
+-->
+                        <div id="seek-bar-div">
+                            <input type="range" id="seek-bar" min="0" value="0" title="seekBar">
+                        </div>
+                        <div class="controls-container" id="media-controls" >
+                            <button class="btn-player" id="play-pause-button"  title="play" onclick="togglePlayPause()">
+                                <i class="zmdi zmdi-play"></i>
+                            </button>
+                            <button class="btn-player stop" id="stop-button" title="stop" onclick="stopPlayer()">
+                                <i class="zmdi zmdi-stop"></i>
+                            </button>
+                            <img src="img/live.png" id="live-img">
+
+                            <button class="btn-player volume" id="volume" title="volume" onclick="mute()" onmouseover="showVolume()" onmouseleave="hideVolume()">
+                                <i class="zmdi zmdi-volume-up"></i>
+                            </button>
+                            <input class="volume" type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.5" title="volume" style="visibility: hidden" onchange="changeVolume()"  onmouseover="showVolume()" onmouseleave="hideVolume()">
+
+                            <button class="btn-player float-right" id="full-screen" title="fullScreen" onclick="fullScreen()">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </button>
+                                <select class="float-right custom-select" id="resolution-select" title="resolution">
+                                    <option value="title">Resolution</option>
+                                    <option value="1080">1080</option>
+                                    <option value="720">720</option>
+                                    <option value="480">480</option>
+                                    <option value="360">360</option>
+                                </select>
+                        </div>
+                        <div class="float-right" id="view-div">
+                            <i class="zmdi zmdi-eye"></i><span id="view-number"> Number</span>
+                        </div>
+                        <div class="row didascalia-video">
+                            <!--
+                            <div class="username">Utente 123</div>
+                            <div class="description" > </div>
+                        -->
+                        </div>
+                    </div>
+
+                </div>
+                <div id="left-arrow">
+                    <button class="btn-player" onclick="displayChat()">
+                        <i class="zmdi zmdi-chevron-left"></i>
+                    </button>
+                </div>
+
+                <div class="col-3 float-left" id="chat-box" style="display: block" >
+                    <div class="title" id="chat-title">
+                        <button class="btn-player" id="btn-hide-chat" onclick="hideChat()">
+                            <i class="zmdi zmdi-chevron-right"></i>
+                        </button>
+                        <span class="subtitle">Chat room</span>
+                    </div>
+                    <div class=" box container" >
+                        <div class="row" id="chat">
+
+                        </div>
+
+                            <form>
+                                <div class="input-group chat-input-group">
+                                    <input type="text" class="form-control" placeholder="Comment" aria-label="Recipient\'s username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text" id="basic-addon2">
+
+                                            <a href="#" class="btn btn-sm" onclick="createImages()" id="example" tabindex="0" rel="popover" data-content="" rel="popover" data-placement="top" title="Donate!" >
+                                                <i class="zmdi zmdi-money"></i>
+                                            </a>
+
+                                            <div class="container-fluid" id="popover_content_wrapper" style="display: none">
+                                                <div class="row" id="popover-images">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <button class="btn btn-chat my-btn" type="submit">Send</button>
+                            </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </body>
+</html>
+
+<script>
+
+function displayLive(){
+    $("#home").hide();
+    $("#video").hide();
+    $("#main-container").show();
+    document.body.style.backgroundColor = "white";
+}
+
+
+</script>

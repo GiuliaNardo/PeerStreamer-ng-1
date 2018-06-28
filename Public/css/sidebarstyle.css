@@ -1,0 +1,87 @@
+/*page*/
+.page{
+    margin-left: 280px; /*same width of sidebar*/
+    margin-top: 30px;
+}
+/*sidebar*/
+.sidebar{
+    height: 100%;
+    width: 280px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 60px; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    background-color: var(--light-color);
+    background: linear-gradient(var(--light-color),#3c7a89);
+
+    color: white;
+    font-size: 1.3em;
+}
+
+.sidelink{
+    list-style-type: none;
+    margin: auto;
+    padding-top: 12px;
+    margin-left: 5px;
+    font-size: 0.8em;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.channel-link:hover{
+    color: white;
+    cursor: pointer;
+}
+.channel-link{
+    color: white;
+}
+#side-in-title{
+    background-color: var(--dark-color);
+    font-weight: 600;
+    font-size: 1em;
+    height:40px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 4px rgba(0,0,0,0.2);
+}
+
+.side-btn{
+    text-align: center;
+}
+
+.my-btn{
+    margin: auto;
+    margin-top: 10px;
+    background-color: #E5A90B;
+    color: white;
+    font-weight: 600!important;
+    box-shadow: 0px 3px 4px rgba(0,0,0,0.2);
+}
+
+.my-btn:hover{
+    transition: 0.4s;
+    color: white;
+    background-color:#E5BB0B;
+}
+#channel-list{
+   line-height: 1.2em;
+   height: 500px;
+   overflow-y:hidden;
+   overflow-x:ellipsis;
+   margin: 20px 10px 10px 10px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .sidebar{
+        width: 230px;
+    }
+    .page{
+        margin-left: 230px!important;
+    }
+
+}

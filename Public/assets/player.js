@@ -27,7 +27,7 @@ function startStream(selectedStream) {
 	var body = { "request": "watch", id: parseInt(selectedStream) };
 	streaming.send({"message": body});
 	// No remote video yet
-	$('#stream').append('<video class="rounded centered" id="waitingvideo" width=320 height=240 />');
+	$('#stream').prepend('<video class="centered" id="waitingvideo" />');
 	if(spinner == null) {
 		var target = document.getElementById('stream');
 		spinner = new Spinner({top:100}).spin(target);
@@ -75,10 +75,10 @@ function createJanus() {
 										if(status === 'starting')
 											$('#status').text("Starting, please wait...").show();
 										else if(status === 'started')
-											$('#status').text("Started").show();
+											$('#status').text("Started, please wait...").show();
 										else if(status === 'stopped')
 											stopStream();
-									} 
+									}
 								} else if(msg["error"] !== undefined && msg["error"] !== null) {
 									bootbox.alert(msg["error"]);
 									stopStream();
@@ -111,17 +111,34 @@ function createJanus() {
 									if($('#remotevideo').length > 0) {
 										// Been here already: let's see if anything changed
 										var videoTracks = stream.getVideoTracks();
+										var audioTracks = stream.getAudioTracks();
+
 										if(videoTracks && videoTracks.length > 0 && !videoTracks[0].muted) {
 											if($("#remotevideo").get(0).videoWidth)
 												$('#remotevideo').show();
-										}
+												console.log("fafa")
+										}/*else{
+											if(audioTracks && audioTracks.length > 0 && !audioTracks[0].muted){
+												$('#plugin').hide();
+												$('#only-audio').show();
+											}else if(!audioTracks && !videoTracks){
+												$('#plugin').hide();
+												$("#container-error").show();
+											}
+
+										}*/
 										return;
 									}
-									$('#stream').append('<video class="rounded centered hide" id="remotevideo" width=320 height=240 autoplay/>');
+									$('#stream').prepend('<div><video id="remotevideo" style="display:none" autoplay/><div>');
 									// Show the stream and hide the spinner when we get a playing event
-									$("#remotevideo").bind("playing", function () {
-										if(this.videoWidth)
-											$('#remotevideo').removeClass('hide').show();
+									$("#remotevideo").on("playing", function () {
+										if(this.videoWidth){
+											$('#status').hide();
+											$("#container-error").hide();
+											document.getElementById('remotevideo').style.display = "block";
+											$("#novideo").hide();
+										}
+
 										if(spinner !== null && spinner !== undefined)
 											spinner.stop();
 										spinner = null;
@@ -147,10 +164,14 @@ function createJanus() {
 										$('#curbitrate').removeClass('hide').show();
 									}
 									Janus.attachMediaStream($('#remotevideo').get(0), stream);
+
 									var videoTracks = stream.getVideoTracks();
+
 									if(videoTracks === null || videoTracks === undefined || videoTracks.length === 0 || videoTracks[0].muted) {
 										// No remote video
-										$('#remotevideo').hide();
+
+										//$("#container-error").show();
+										document.getElementById('remotevideo').style.display = "none";
 										$('#stream').append(
 											'<div id="novideo" class="no-video-container">' +
 												'<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
