@@ -32,12 +32,7 @@
 
 	const videoElement = document.getElementById("preview");
 	const videoButton = document.getElementById("change-cam");
-	/*
-	const audioSelect = document.querySelector('select#audioSource');
-	const videoSelect = document.querySelector('select#videoSource');
-	audioSelect.onchange = f;
-	videoSelect.onchange = f
-	*/
+
 
 	function handleMessage(msg){
 		var event = msg["videoroom"];
@@ -103,6 +98,7 @@
 					if (error.name === "NotAllowedError" || error.name === "NotFoundError"){
 						document.getElementById("preview").srcObject = null;
 						$('#form-div').hide();
+						$('#feedback').hide();
 						$('#error').html("Please allow at least one device");
 						$('#error').show();
 		            }
@@ -239,12 +235,7 @@
 		xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					set_state("Streaming " + description);
-					/*
-					$('#form-div').hide();
-					$('#preview').removeClass('preview');
-					$('#preview-title').text("You are transmitting on " + description + " channel");
-					*/
-
+					
 				}
 				if (this.readyState == 4 && this.status != 200) {
 					set_state("&lt;An error occurred with the streaming process&gt;");

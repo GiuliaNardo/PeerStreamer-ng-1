@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     for (i; i< max; i++){
         $("#chat").append("<div class=\"col col-2 col-lg-2 user-img\">\n" +
-            "                    <img src=\"icon.png\">\n" +
+            "                    <img src=\"https://image.freepik.com/icone-gratis/profilo-utente-ombra_318-40244.jpg\">\n" +
             "                    <div class=\"user-name\">Penelope12345</div>\n" +
             "                </div>\n" +
             "                <div class=\"col col-10 col-lg-10 chat-text \">\n" +
@@ -99,7 +99,7 @@ function createImages() {
     var i =0, max_images = 15;
     for (i; i<max_images; i++) {
         $("#popover-images").append("<div class=\"col-popover col-4\">\n" +
-            "    <button class='popover-btn' type=\"submit\"><img class=\"popover-img\" src=\"tile.png\"></button>\n" +
+            "    <button class='popover-btn' type=\"submit\"><img class=\"popover-img\" src=\"https://s3.pixers.pics/pixers/700/FO/11/87/39/88/700_FO11873988_13d7872d148cbcd83db171fe442b144d.jpg\"></button>\n" +
             "</div>")
     }
 }
@@ -114,11 +114,11 @@ function togglePlayPause() {
 
         if ($("#remotevideo").get(0).paused || $("#remotevideo").get(0).ended){
             btn.title = "pause";
-            btn.innerHTML = "<i class=\"zmdi zmdi-play\"></i>";
+            btn.innerHTML = "<i class=\"zmdi zmdi-pause\"></i>";
             $("#remotevideo").trigger('play');
         } else{
             btn.title = "play";
-            btn.innerHTML = "<i class=\"zmdi zmdi-pause\"></i>";
+            btn.innerHTML = "<i class=\"zmdi zmdi-play\"></i>";
             $("#remotevideo").trigger('pause');
         }
     }
