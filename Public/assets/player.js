@@ -75,7 +75,7 @@ function createJanus() {
 										if(status === 'starting')
 											$('#status').text("Starting, please wait...").show();
 										else if(status === 'started')
-											$('#status').text("Started, please wait...").show();
+											$('#status').text("Started").show();
 										else if(status === 'stopped')
 											stopStream();
 									}
@@ -114,19 +114,11 @@ function createJanus() {
 										var audioTracks = stream.getAudioTracks();
 
 										if(videoTracks && videoTracks.length > 0 && !videoTracks[0].muted) {
-											if($("#remotevideo").get(0).videoWidth)
+											if($("#remotevideo").get(0).videoWidth){
 												$('#remotevideo').show();
-												console.log("fafa")
-										}/*else{
-											if(audioTracks && audioTracks.length > 0 && !audioTracks[0].muted){
-												$('#plugin').hide();
-												$('#only-audio').show();
-											}else if(!audioTracks && !videoTracks){
-												$('#plugin').hide();
-												$("#container-error").show();
 											}
 
-										}*/
+										}
 										return;
 									}
 									$('#stream').prepend('<div><video id="remotevideo" style="display:none" autoplay/><div>');

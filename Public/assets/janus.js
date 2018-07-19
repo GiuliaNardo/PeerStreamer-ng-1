@@ -1416,7 +1416,6 @@ function Janus(gatewayCallbacks) {
 	}
 
 	function prepareWebrtc(handleId, callbacks) {
-		console.log("aa")
 		callbacks = callbacks || {};
 		callbacks.success = (typeof callbacks.success == "function") ? callbacks.success : Janus.noop;
 		callbacks.error = (typeof callbacks.error == "function") ? callbacks.error : webrtcError;

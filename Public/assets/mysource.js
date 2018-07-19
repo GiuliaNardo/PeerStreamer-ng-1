@@ -129,10 +129,6 @@
 									Janus.log("Plugin attached! (" + janus_plugin.getPlugin() + ", id=" + janus_plugin.getId() + ")");
 
 									requestRoomCreation();
-									/*var btn = document.getElementById('change-cam')
-									btn.onclick = function(){
-										janus_plugin.createOffer();
-									}*/
 								},
 								error: function(error) {
 									Janus.error("  -- Error attaching plugin... ", error);
@@ -180,9 +176,9 @@
 														document.getElementById("preview").srcObject = null;
 														$('#success').text("Stream stopped!");
 														$('#success').show();
+														('#div-img').hide();
 														$("#stop-stream").hide();
 														$('#feedback').hide();
-														console.log("nana2")
 												}
 											} catch(e) {}
 										}
@@ -235,7 +231,7 @@
 		xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					set_state("Streaming " + description);
-					
+
 				}
 				if (this.readyState == 4 && this.status != 200) {
 					set_state("&lt;An error occurred with the streaming process&gt;");
@@ -270,9 +266,8 @@
 					}
 					function checkSettings(){
 						var res = true;
-						console.log("g" +$("#stop-audio").is(":disabled"))
 						if( ($("#stop-audio").is(":disabled")) && ($("#stop-video").is(":disabled")) ){
-							$("#title-err").html("Transmir at least video or audio");
+							$("#title-err").html("Transmit at least video or audio");
 							$("#title-err").show();
 							res = false;
 						}

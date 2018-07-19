@@ -33,7 +33,6 @@ $(document).ready(function () {
     if (live){
         $('#seek-bar-div').hide();
         $("#stop-button").hide();
-        console.log("aaaa")
     } else{
         $("#live-img").hide();
         $('#remotevideo').on("timeupdate", function() {

@@ -30,24 +30,27 @@ function set_state(s)
 
 function filterChannels(){
 	//call update channel with matched channel name
-	var list = [];
-	var i = 0;
-	var word = null;
 	var text = document.getElementById("search").value;
-	for (el in channels){
-		var ch_name = channels[el].name;
-		if(ch_name.toLowerCase().indexOf(text) >= 0){
-			list[i] = channels[el];
-			i++;
+	if(text!=""){
+		var list = [];
+		var i = 0;
+		var word = null;
+
+		for (el in channels){
+			var ch_name = channels[el].name;
+			if(ch_name.toLowerCase().indexOf(text) >= 0){
+				list[i] = channels[el];
+				i++;
+			}
 		}
+		update_channels(list)
 	}
-	update_channels(list)
 }
 
 function checkIfChannelExists(chs){
 	//check if current channel is still exists
 	var res = false;
-	if(document.getElementById("video")!=null){
+	if(document.getElementById("video")!=null){ //only if we are on video section
 		var text = document.getElementById("player-title").textContent;
 		if (text!=""){
 			for (el in chs){
@@ -72,6 +75,10 @@ function request_channel(ch)
 		}
 		if (this.readyState == 4 && this.status != 200) {
 			set_state("&lt;An error occurred with channel&gt;");
+			$('#status').hide();
+			$('#only-audio').hide();
+			$('#remotevideo').hide();
+			$("#container-error").text("An error occurred with channel")
 			$("#container-error").show();
 		}
 	};
@@ -101,15 +108,38 @@ function update_channels(chs)
 
 				if (chs.length > 0){
 					for (el in chs) {
-						//alert(chs[el].toSource())
 						if(home!=null){
 							if(home.style.display === "block"){
-								createThumbnail(chs[el].name); //in home.js file
+								//createThumbnail(chs[el].name); //in home.js file
 								document.body.style.backgroundColor = "#fff";
+								//thumbnail
+
+								var primo = document.createElement("DIV");
+								primo.className = "col col-lg-3 col-3 square";
+
+								var secondo = document.createElement("DIV");
+								secondo.className = "didascalia";
+
+								secondo.innerHTML = "Watch " + "<div style='font-weight:600'>" + chs[el].name + "<div>";
+
+								var superDiv = document.createElement("DIV");
+								superDiv.className ="image";
+								var a = document.createElement("A");
+								a.id = "thumb-id"
+								var img = document.createElement("IMG");
+								img.className = "img-thumbnail"
+								img.src = "img/albapemba.jpg";
+
+								superDiv.appendChild(img);
+								a.appendChild(superDiv);
+								primo.appendChild(a);
+								primo.appendChild(secondo);
+								$('#thumbnail').append(primo)
+								console.log("creato uno")
 							}
 
 						}
-
+						//channel link
 						var superNode = document.createElement("DIV");
 						superNode.className ="sidelink"
 						var node = document.createElement("DIV");
@@ -118,11 +148,14 @@ function update_channels(chs)
 
 						node.appendChild(textnode);
 						superNode.appendChild(node);
+
+
+
 						$(".channel-list").append(superNode);
 						(function (ch) {
 							if(home!=null){
 								if(home.style.display === "block"){
-									document.getElementById("thumb-id").onclick=function(e){
+									a.onclick=function(e){
 										request_channel(ch);
 										document.getElementById("home").style.display = "none";
 										document.getElementById("video").style.display = "block";
@@ -156,6 +189,8 @@ function update_channels(chs)
 	var ch_exists = checkIfChannelExists(chs);
 	if (!ch_exists){
 		$('#remotevideo').hide();
+		$('#status').hide();
+		$('#only-audio').hide();
 		$('#container-error').show();
 	}
 

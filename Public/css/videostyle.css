@@ -6,8 +6,8 @@ body{
 }
 #container-error{
     width: 100%;
-    height: 400px;
-    padding-top:200px;
+    height: 500px;
+    padding-top:250px;
     background: rgb(0,0,0,0.5);
     opacity: 0.9;
 }
